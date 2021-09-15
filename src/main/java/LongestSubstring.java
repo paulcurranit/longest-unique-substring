@@ -8,25 +8,24 @@ public class LongestSubstring {
         int length = aString.length();
         int index = 0;
         int currentStringLength = 0;
-        HashSet subStringCharacterSet = new HashSet();
+        HashSet<Character> subStringCharacterSet = new HashSet<>();
 
         while(index < length) {
             char c = aString.charAt(index);
             if(subStringCharacterSet.contains(c)) {
-                if(currentStringLength > longestSubstringLength) {
-                    longestSubstringLength = currentStringLength;
-                }
+                longestSubstringLength = currentStringLength > longestSubstringLength ? currentStringLength : longestSubstringLength;
                 subStringCharacterSet.clear();
                 currentStringLength = 0;
             }
-            if(currentStringLength > longestSubstringLength) {
-                longestSubstringLength = currentStringLength;
-            }
+
             subStringCharacterSet.add(c);
             currentStringLength++;
             index++;
         }
 
+        if(currentStringLength > longestSubstringLength) {
+            longestSubstringLength = currentStringLength;
+        }
 
         return longestSubstringLength;
     }
